@@ -1,0 +1,1275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProyectoFactModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Compras">
+          <Key>
+            <PropertyRef Name="PKCompraID" />
+          </Key>
+          <Property Name="PKCompraID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="FKEmpleadoID" Type="int" Nullable="false" />
+          <Property Name="FKProveedorID" Type="int" Nullable="false" />
+          <Property Name="Estatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Compras_Detalles">
+          <Key>
+            <PropertyRef Name="PKCompraDetalleID" />
+          </Key>
+          <Property Name="PKCompraDetalleID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FKCompraID" Type="bigint" Nullable="false" />
+          <Property Name="FKProductoID" Type="bigint" Nullable="false" />
+          <Property Name="Estatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="PrecioUnidad" Type="money" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="TotalProducto" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Compras_Devoluciones">
+          <Key>
+            <PropertyRef Name="PKCompraDevolucionID" />
+          </Key>
+          <Property Name="PKCompraDevolucionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaDevolucion" Type="datetime" Nullable="false" />
+          <Property Name="FKCompraID" Type="bigint" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Compras_Devoluciones_Detalles">
+          <Key>
+            <PropertyRef Name="PKDevolucionDetalleID" />
+          </Key>
+          <Property Name="PKDevolucionDetalleID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FKDevolucionID" Type="bigint" Nullable="false" />
+          <Property Name="FKProductosID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Descuentos">
+          <Key>
+            <PropertyRef Name="PKDescuentoID" />
+          </Key>
+          <Property Name="PKDescuentoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreDescuento" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CantidadDescuento" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="PKEmpleadoID" />
+          </Key>
+          <Property Name="PKEmpleadoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreEmpleado" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoEmpleado" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NombreUsuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Contrasena" Type="nvarchar" MaxLength="350" Nullable="false" />
+          <Property Name="Genero" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FKRango" Type="smallint" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Modulos">
+          <Key>
+            <PropertyRef Name="PKModulosID" />
+          </Key>
+          <Property Name="PKModulosID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescripcionModulo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EstadoModulo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="PKProductoID" />
+          </Key>
+          <Property Name="PKProductoID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescProducto" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Existencia" Type="int" Nullable="false" />
+          <Property Name="ExistenciaMinima" Type="int" Nullable="false" />
+          <Property Name="FKCategoria" Type="int" Nullable="false" />
+          <Property Name="PrecioUnidadCompra" Type="money" />
+          <Property Name="ISV" Type="nvarchar" MaxLength="10" />
+          <Property Name="PrecioUnidadVenta" Type="money" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Productos_Categorias">
+          <Key>
+            <PropertyRef Name="PKCategoriaID" />
+          </Key>
+          <Property Name="PKCategoriaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCategoria" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DescripcionCategoria" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Productos_Presentaciones">
+          <Key>
+            <PropertyRef Name="PKPresentacionID" />
+          </Key>
+          <Property Name="PKPresentacionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombrePresentacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Productos_Unidades">
+          <Key>
+            <PropertyRef Name="PKUnidadID" />
+          </Key>
+          <Property Name="PKUnidadID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreUnidad" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="PKProveedorID" />
+          </Key>
+          <Property Name="PKProveedorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreProveedor" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NombreContacto" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TelefonoContacto1" Type="int" Nullable="false" />
+          <Property Name="TelefonoContacto2" Type="int" />
+          <Property Name="EmailContacto1" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmailContacto2" Type="nvarchar" MaxLength="100" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="100" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rangos">
+          <Key>
+            <PropertyRef Name="PKRangoID" />
+          </Key>
+          <Property Name="PKRangoID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescripcionRango" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EstadoRango" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RangosModulos">
+          <Key>
+            <PropertyRef Name="PKRangosModulos" />
+          </Key>
+          <Property Name="PKRangosModulos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FKRangosID" Type="smallint" Nullable="false" />
+          <Property Name="FKModulosID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Ventas">
+          <Key>
+            <PropertyRef Name="PKVentaID" />
+          </Key>
+          <Property Name="PKVentaID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="FKEmpleadoID" Type="int" Nullable="false" />
+          <Property Name="Estatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ventas_Detalles">
+          <Key>
+            <PropertyRef Name="PKVentaDetalleID" />
+          </Key>
+          <Property Name="PKVentaDetalleID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FKVentaID" Type="bigint" Nullable="false" />
+          <Property Name="FKProductoID" Type="bigint" Nullable="false" />
+          <Property Name="Estatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="PrecioUnidad" Type="money" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="FKDescuentoID" Type="int" />
+          <Property Name="TotalProducto" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ventas_Devoluciones">
+          <Key>
+            <PropertyRef Name="PKVentaDevolucionID" />
+          </Key>
+          <Property Name="PKVentaDevolucionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaDevolucion" Type="datetime" Nullable="false" />
+          <Property Name="FKVentaID" Type="bigint" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ventas_Devoluciones_Detalles">
+          <Key>
+            <PropertyRef Name="PKDevolucionDetalleID" />
+          </Key>
+          <Property Name="PKDevolucionDetalleID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FKDevolucionID" Type="bigint" Nullable="false" />
+          <Property Name="FKProductosID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Compras_Detalles_Compras">
+          <End Role="Compras" Type="Self.Compras" Multiplicity="1" />
+          <End Role="Compras_Detalles" Type="Self.Compras_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compras">
+              <PropertyRef Name="PKCompraID" />
+            </Principal>
+            <Dependent Role="Compras_Detalles">
+              <PropertyRef Name="FKCompraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compras_Detalles_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="Compras_Detalles" Type="Self.Compras_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="PKProductoID" />
+            </Principal>
+            <Dependent Role="Compras_Detalles">
+              <PropertyRef Name="FKProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compras_Devoluciones_Compras">
+          <End Role="Compras" Type="Self.Compras" Multiplicity="1" />
+          <End Role="Compras_Devoluciones" Type="Self.Compras_Devoluciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compras">
+              <PropertyRef Name="PKCompraID" />
+            </Principal>
+            <Dependent Role="Compras_Devoluciones">
+              <PropertyRef Name="FKCompraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compras_Devoluciones_Detalles_Compras_Devoluciones">
+          <End Role="Compras_Devoluciones" Type="Self.Compras_Devoluciones" Multiplicity="1" />
+          <End Role="Compras_Devoluciones_Detalles" Type="Self.Compras_Devoluciones_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compras_Devoluciones">
+              <PropertyRef Name="PKCompraDevolucionID" />
+            </Principal>
+            <Dependent Role="Compras_Devoluciones_Detalles">
+              <PropertyRef Name="FKDevolucionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compras_Devoluciones_Detalles_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="Compras_Devoluciones_Detalles" Type="Self.Compras_Devoluciones_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="PKProductoID" />
+            </Principal>
+            <Dependent Role="Compras_Devoluciones_Detalles">
+              <PropertyRef Name="FKProductosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compras_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Compras" Type="Self.Compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="PKEmpleadoID" />
+            </Principal>
+            <Dependent Role="Compras">
+              <PropertyRef Name="FKEmpleadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compras_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
+          <End Role="Compras" Type="Self.Compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="PKProveedorID" />
+            </Principal>
+            <Dependent Role="Compras">
+              <PropertyRef Name="FKProveedorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Rangos">
+          <End Role="Rangos" Type="Self.Rangos" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rangos">
+              <PropertyRef Name="PKRangoID" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="FKRango" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Productos_Productos_Categorias">
+          <End Role="Productos_Categorias" Type="Self.Productos_Categorias" Multiplicity="1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos_Categorias">
+              <PropertyRef Name="PKCategoriaID" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="FKCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RangosModulos_Rangos">
+          <End Role="Rangos" Type="Self.Rangos" Multiplicity="1" />
+          <End Role="RangosModulos" Type="Self.RangosModulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rangos">
+              <PropertyRef Name="PKRangoID" />
+            </Principal>
+            <Dependent Role="RangosModulos">
+              <PropertyRef Name="FKRangosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RangosModulos_RangosModulos">
+          <End Role="Modulos" Type="Self.Modulos" Multiplicity="1" />
+          <End Role="RangosModulos" Type="Self.RangosModulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modulos">
+              <PropertyRef Name="PKModulosID" />
+            </Principal>
+            <Dependent Role="RangosModulos">
+              <PropertyRef Name="FKModulosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Detalles_Descuentos">
+          <End Role="Descuentos" Type="Self.Descuentos" Multiplicity="0..1" />
+          <End Role="Ventas_Detalles" Type="Self.Ventas_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Descuentos">
+              <PropertyRef Name="PKDescuentoID" />
+            </Principal>
+            <Dependent Role="Ventas_Detalles">
+              <PropertyRef Name="FKDescuentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Detalles_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="Ventas_Detalles" Type="Self.Ventas_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="PKProductoID" />
+            </Principal>
+            <Dependent Role="Ventas_Detalles">
+              <PropertyRef Name="FKProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Detalles_Ventas">
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="1" />
+          <End Role="Ventas_Detalles" Type="Self.Ventas_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ventas">
+              <PropertyRef Name="PKVentaID" />
+            </Principal>
+            <Dependent Role="Ventas_Detalles">
+              <PropertyRef Name="FKVentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Devoluciones_Detalles_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="Ventas_Devoluciones_Detalles" Type="Self.Ventas_Devoluciones_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="PKProductoID" />
+            </Principal>
+            <Dependent Role="Ventas_Devoluciones_Detalles">
+              <PropertyRef Name="FKProductosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Devoluciones_Detalles_Ventas_Devoluciones">
+          <End Role="Ventas_Devoluciones" Type="Self.Ventas_Devoluciones" Multiplicity="1" />
+          <End Role="Ventas_Devoluciones_Detalles" Type="Self.Ventas_Devoluciones_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ventas_Devoluciones">
+              <PropertyRef Name="PKVentaDevolucionID" />
+            </Principal>
+            <Dependent Role="Ventas_Devoluciones_Detalles">
+              <PropertyRef Name="FKDevolucionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Devoluciones_Ventas">
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="1" />
+          <End Role="Ventas_Devoluciones" Type="Self.Ventas_Devoluciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ventas">
+              <PropertyRef Name="PKVentaID" />
+            </Principal>
+            <Dependent Role="Ventas_Devoluciones">
+              <PropertyRef Name="FKVentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="PKEmpleadoID" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="FKEmpleadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProyectoFactModelStoreContainer">
+          <EntitySet Name="Compras" EntityType="Self.Compras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Compras_Detalles" EntityType="Self.Compras_Detalles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Compras_Devoluciones" EntityType="Self.Compras_Devoluciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Compras_Devoluciones_Detalles" EntityType="Self.Compras_Devoluciones_Detalles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Descuentos" EntityType="Self.Descuentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modulos" EntityType="Self.Modulos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos_Categorias" EntityType="Self.Productos_Categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos_Presentaciones" EntityType="Self.Productos_Presentaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos_Unidades" EntityType="Self.Productos_Unidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rangos" EntityType="Self.Rangos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RangosModulos" EntityType="Self.RangosModulos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ventas" EntityType="Self.Ventas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ventas_Detalles" EntityType="Self.Ventas_Detalles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ventas_Devoluciones" EntityType="Self.Ventas_Devoluciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ventas_Devoluciones_Detalles" EntityType="Self.Ventas_Devoluciones_Detalles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Compras_Detalles_Compras" Association="Self.FK_Compras_Detalles_Compras">
+            <End Role="Compras" EntitySet="Compras" />
+            <End Role="Compras_Detalles" EntitySet="Compras_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compras_Detalles_Productos" Association="Self.FK_Compras_Detalles_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Compras_Detalles" EntitySet="Compras_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compras_Devoluciones_Compras" Association="Self.FK_Compras_Devoluciones_Compras">
+            <End Role="Compras" EntitySet="Compras" />
+            <End Role="Compras_Devoluciones" EntitySet="Compras_Devoluciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compras_Devoluciones_Detalles_Compras_Devoluciones" Association="Self.FK_Compras_Devoluciones_Detalles_Compras_Devoluciones">
+            <End Role="Compras_Devoluciones" EntitySet="Compras_Devoluciones" />
+            <End Role="Compras_Devoluciones_Detalles" EntitySet="Compras_Devoluciones_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compras_Devoluciones_Detalles_Productos" Association="Self.FK_Compras_Devoluciones_Detalles_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Compras_Devoluciones_Detalles" EntitySet="Compras_Devoluciones_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compras_Empleados" Association="Self.FK_Compras_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Compras" EntitySet="Compras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compras_Proveedores" Association="Self.FK_Compras_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Compras" EntitySet="Compras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Rangos" Association="Self.FK_Empleados_Rangos">
+            <End Role="Rangos" EntitySet="Rangos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Productos_Productos_Categorias" Association="Self.FK_Productos_Productos_Categorias">
+            <End Role="Productos_Categorias" EntitySet="Productos_Categorias" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RangosModulos_Rangos" Association="Self.FK_RangosModulos_Rangos">
+            <End Role="Rangos" EntitySet="Rangos" />
+            <End Role="RangosModulos" EntitySet="RangosModulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RangosModulos_RangosModulos" Association="Self.FK_RangosModulos_RangosModulos">
+            <End Role="Modulos" EntitySet="Modulos" />
+            <End Role="RangosModulos" EntitySet="RangosModulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Detalles_Descuentos" Association="Self.FK_Ventas_Detalles_Descuentos">
+            <End Role="Descuentos" EntitySet="Descuentos" />
+            <End Role="Ventas_Detalles" EntitySet="Ventas_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Detalles_Productos" Association="Self.FK_Ventas_Detalles_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Ventas_Detalles" EntitySet="Ventas_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Detalles_Ventas" Association="Self.FK_Ventas_Detalles_Ventas">
+            <End Role="Ventas" EntitySet="Ventas" />
+            <End Role="Ventas_Detalles" EntitySet="Ventas_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Devoluciones_Detalles_Productos" Association="Self.FK_Ventas_Devoluciones_Detalles_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Ventas_Devoluciones_Detalles" EntitySet="Ventas_Devoluciones_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Devoluciones_Detalles_Ventas_Devoluciones" Association="Self.FK_Ventas_Devoluciones_Detalles_Ventas_Devoluciones">
+            <End Role="Ventas_Devoluciones" EntitySet="Ventas_Devoluciones" />
+            <End Role="Ventas_Devoluciones_Detalles" EntitySet="Ventas_Devoluciones_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Devoluciones_Ventas" Association="Self.FK_Ventas_Devoluciones_Ventas">
+            <End Role="Ventas" EntitySet="Ventas" />
+            <End Role="Ventas_Devoluciones" EntitySet="Ventas_Devoluciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Empleados" Association="Self.FK_Ventas_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProyectoFactModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Compras">
+          <Key>
+            <PropertyRef Name="PKCompraID" />
+          </Key>
+          <Property Name="PKCompraID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FKEmpleadoID" Type="Int32" Nullable="false" />
+          <Property Name="FKProveedorID" Type="Int32" Nullable="false" />
+          <Property Name="Estatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Compras_Detalles" Relationship="Self.FK_Compras_Detalles_Compras" FromRole="Compras" ToRole="Compras_Detalles" />
+          <NavigationProperty Name="Compras_Devoluciones" Relationship="Self.FK_Compras_Devoluciones_Compras" FromRole="Compras" ToRole="Compras_Devoluciones" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_Compras_Empleados" FromRole="Compras" ToRole="Empleados" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK_Compras_Proveedores" FromRole="Compras" ToRole="Proveedores" />
+        </EntityType>
+        <EntityType Name="Compras_Detalles">
+          <Key>
+            <PropertyRef Name="PKCompraDetalleID" />
+          </Key>
+          <Property Name="PKCompraDetalleID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FKCompraID" Type="Int64" Nullable="false" />
+          <Property Name="FKProductoID" Type="Int64" Nullable="false" />
+          <Property Name="PrecioUnidad" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="TotalProducto" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Compras" Relationship="Self.FK_Compras_Detalles_Compras" FromRole="Compras_Detalles" ToRole="Compras" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK_Compras_Detalles_Productos" FromRole="Compras_Detalles" ToRole="Productos" />
+          <Property Name="Estatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Compras_Devoluciones">
+          <Key>
+            <PropertyRef Name="PKCompraDevolucionID" />
+          </Key>
+          <Property Name="PKCompraDevolucionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaDevolucion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FKCompraID" Type="Int64" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Compras" Relationship="Self.FK_Compras_Devoluciones_Compras" FromRole="Compras_Devoluciones" ToRole="Compras" />
+          <NavigationProperty Name="Compras_Devoluciones_Detalles" Relationship="Self.FK_Compras_Devoluciones_Detalles_Compras_Devoluciones" FromRole="Compras_Devoluciones" ToRole="Compras_Devoluciones_Detalles" />
+        </EntityType>
+        <EntityType Name="Compras_Devoluciones_Detalles">
+          <Key>
+            <PropertyRef Name="PKDevolucionDetalleID" />
+          </Key>
+          <Property Name="PKDevolucionDetalleID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FKDevolucionID" Type="Int64" Nullable="false" />
+          <Property Name="FKProductosID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Compras_Devoluciones" Relationship="Self.FK_Compras_Devoluciones_Detalles_Compras_Devoluciones" FromRole="Compras_Devoluciones_Detalles" ToRole="Compras_Devoluciones" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK_Compras_Devoluciones_Detalles_Productos" FromRole="Compras_Devoluciones_Detalles" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Descuentos">
+          <Key>
+            <PropertyRef Name="PKDescuentoID" />
+          </Key>
+          <Property Name="PKDescuentoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreDescuento" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CantidadDescuento" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Ventas_Detalles" Relationship="Self.FK_Ventas_Detalles_Descuentos" FromRole="Descuentos" ToRole="Ventas_Detalles" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="PKEmpleadoID" />
+          </Key>
+          <Property Name="PKEmpleadoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreEmpleado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApellidoEmpleado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="350" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Genero" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FKRango" Type="Int16" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Compras" Relationship="Self.FK_Compras_Empleados" FromRole="Empleados" ToRole="Compras" />
+          <NavigationProperty Name="Rangos" Relationship="Self.FK_Empleados_Rangos" FromRole="Empleados" ToRole="Rangos" />
+          <NavigationProperty Name="Ventas" Relationship="Self.FK_Ventas_Empleados" FromRole="Empleados" ToRole="Ventas" />
+        </EntityType>
+        <EntityType Name="Modulos">
+          <Key>
+            <PropertyRef Name="PKModulosID" />
+          </Key>
+          <Property Name="PKModulosID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescripcionModulo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EstadoModulo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="RangosModulos" Relationship="Self.FK_RangosModulos_RangosModulos" FromRole="Modulos" ToRole="RangosModulos" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="PKProductoID" />
+          </Key>
+          <Property Name="PKProductoID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescProducto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Existencia" Type="Int32" Nullable="false" />
+          <Property Name="ExistenciaMinima" Type="Int32" Nullable="false" />
+          <Property Name="FKCategoria" Type="Int32" Nullable="false" />
+          <Property Name="PrecioUnidadVenta" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PrecioUnidadCompra" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Compras_Detalles" Relationship="Self.FK_Compras_Detalles_Productos" FromRole="Productos" ToRole="Compras_Detalles" />
+          <NavigationProperty Name="Compras_Devoluciones_Detalles" Relationship="Self.FK_Compras_Devoluciones_Detalles_Productos" FromRole="Productos" ToRole="Compras_Devoluciones_Detalles" />
+          <NavigationProperty Name="Productos_Categorias" Relationship="Self.FK_Productos_Productos_Categorias" FromRole="Productos" ToRole="Productos_Categorias" />
+          <NavigationProperty Name="Ventas_Detalles" Relationship="Self.FK_Ventas_Detalles_Productos" FromRole="Productos" ToRole="Ventas_Detalles" />
+          <NavigationProperty Name="Ventas_Devoluciones_Detalles" Relationship="Self.FK_Ventas_Devoluciones_Detalles_Productos" FromRole="Productos" ToRole="Ventas_Devoluciones_Detalles" />
+          <Property Name="ISV" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Productos_Categorias">
+          <Key>
+            <PropertyRef Name="PKCategoriaID" />
+          </Key>
+          <Property Name="PKCategoriaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCategoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DescripcionCategoria" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK_Productos_Productos_Categorias" FromRole="Productos_Categorias" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Productos_Presentaciones">
+          <Key>
+            <PropertyRef Name="PKPresentacionID" />
+          </Key>
+          <Property Name="PKPresentacionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombrePresentacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Productos_Unidades">
+          <Key>
+            <PropertyRef Name="PKUnidadID" />
+          </Key>
+          <Property Name="PKUnidadID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreUnidad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="PKProveedorID" />
+          </Key>
+          <Property Name="PKProveedorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreProveedor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NombreContacto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TelefonoContacto1" Type="Int32" Nullable="false" />
+          <Property Name="TelefonoContacto2" Type="Int32" />
+          <Property Name="EmailContacto1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailContacto2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Compras" Relationship="Self.FK_Compras_Proveedores" FromRole="Proveedores" ToRole="Compras" />
+        </EntityType>
+        <EntityType Name="Rangos">
+          <Key>
+            <PropertyRef Name="PKRangoID" />
+          </Key>
+          <Property Name="PKRangoID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescripcionRango" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EstadoRango" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleados_Rangos" FromRole="Rangos" ToRole="Empleados" />
+          <NavigationProperty Name="RangosModulos" Relationship="Self.FK_RangosModulos_Rangos" FromRole="Rangos" ToRole="RangosModulos" />
+        </EntityType>
+        <EntityType Name="RangosModulos">
+          <Key>
+            <PropertyRef Name="PKRangosModulos" />
+          </Key>
+          <Property Name="PKRangosModulos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FKRangosID" Type="Int16" Nullable="false" />
+          <Property Name="FKModulosID" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Modulos" Relationship="Self.FK_RangosModulos_RangosModulos" FromRole="RangosModulos" ToRole="Modulos" />
+          <NavigationProperty Name="Rangos" Relationship="Self.FK_RangosModulos_Rangos" FromRole="RangosModulos" ToRole="Rangos" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Ventas">
+          <Key>
+            <PropertyRef Name="PKVentaID" />
+          </Key>
+          <Property Name="PKVentaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FKEmpleadoID" Type="Int32" Nullable="false" />
+          <Property Name="Estatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_Ventas_Empleados" FromRole="Ventas" ToRole="Empleados" />
+          <NavigationProperty Name="Ventas_Detalles" Relationship="Self.FK_Ventas_Detalles_Ventas" FromRole="Ventas" ToRole="Ventas_Detalles" />
+          <NavigationProperty Name="Ventas_Devoluciones" Relationship="Self.FK_Ventas_Devoluciones_Ventas" FromRole="Ventas" ToRole="Ventas_Devoluciones" />
+        </EntityType>
+        <EntityType Name="Ventas_Detalles">
+          <Key>
+            <PropertyRef Name="PKVentaDetalleID" />
+          </Key>
+          <Property Name="PKVentaDetalleID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FKVentaID" Type="Int64" Nullable="false" />
+          <Property Name="FKProductoID" Type="Int64" Nullable="false" />
+          <Property Name="PrecioUnidad" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="FKDescuentoID" Type="Int32" />
+          <Property Name="TotalProducto" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Descuentos" Relationship="Self.FK_Ventas_Detalles_Descuentos" FromRole="Ventas_Detalles" ToRole="Descuentos" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK_Ventas_Detalles_Productos" FromRole="Ventas_Detalles" ToRole="Productos" />
+          <NavigationProperty Name="Ventas" Relationship="Self.FK_Ventas_Detalles_Ventas" FromRole="Ventas_Detalles" ToRole="Ventas" />
+          <Property Name="Estatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Ventas_Devoluciones">
+          <Key>
+            <PropertyRef Name="PKVentaDevolucionID" />
+          </Key>
+          <Property Name="PKVentaDevolucionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaDevolucion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FKVentaID" Type="Int64" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Ventas" Relationship="Self.FK_Ventas_Devoluciones_Ventas" FromRole="Ventas_Devoluciones" ToRole="Ventas" />
+          <NavigationProperty Name="Ventas_Devoluciones_Detalles" Relationship="Self.FK_Ventas_Devoluciones_Detalles_Ventas_Devoluciones" FromRole="Ventas_Devoluciones" ToRole="Ventas_Devoluciones_Detalles" />
+        </EntityType>
+        <EntityType Name="Ventas_Devoluciones_Detalles">
+          <Key>
+            <PropertyRef Name="PKDevolucionDetalleID" />
+          </Key>
+          <Property Name="PKDevolucionDetalleID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FKDevolucionID" Type="Int64" Nullable="false" />
+          <Property Name="FKProductosID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK_Ventas_Devoluciones_Detalles_Productos" FromRole="Ventas_Devoluciones_Detalles" ToRole="Productos" />
+          <NavigationProperty Name="Ventas_Devoluciones" Relationship="Self.FK_Ventas_Devoluciones_Detalles_Ventas_Devoluciones" FromRole="Ventas_Devoluciones_Detalles" ToRole="Ventas_Devoluciones" />
+        </EntityType>
+        <Association Name="FK_Compras_Detalles_Compras">
+          <End Role="Compras" Type="Self.Compras" Multiplicity="1" />
+          <End Role="Compras_Detalles" Type="Self.Compras_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compras">
+              <PropertyRef Name="PKCompraID" />
+            </Principal>
+            <Dependent Role="Compras_Detalles">
+              <PropertyRef Name="FKCompraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compras_Devoluciones_Compras">
+          <End Role="Compras" Type="Self.Compras" Multiplicity="1" />
+          <End Role="Compras_Devoluciones" Type="Self.Compras_Devoluciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compras">
+              <PropertyRef Name="PKCompraID" />
+            </Principal>
+            <Dependent Role="Compras_Devoluciones">
+              <PropertyRef Name="FKCompraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compras_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Compras" Type="Self.Compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="PKEmpleadoID" />
+            </Principal>
+            <Dependent Role="Compras">
+              <PropertyRef Name="FKEmpleadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compras_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
+          <End Role="Compras" Type="Self.Compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="PKProveedorID" />
+            </Principal>
+            <Dependent Role="Compras">
+              <PropertyRef Name="FKProveedorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compras_Detalles_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="Compras_Detalles" Type="Self.Compras_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="PKProductoID" />
+            </Principal>
+            <Dependent Role="Compras_Detalles">
+              <PropertyRef Name="FKProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compras_Devoluciones_Detalles_Compras_Devoluciones">
+          <End Role="Compras_Devoluciones" Type="Self.Compras_Devoluciones" Multiplicity="1" />
+          <End Role="Compras_Devoluciones_Detalles" Type="Self.Compras_Devoluciones_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compras_Devoluciones">
+              <PropertyRef Name="PKCompraDevolucionID" />
+            </Principal>
+            <Dependent Role="Compras_Devoluciones_Detalles">
+              <PropertyRef Name="FKDevolucionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compras_Devoluciones_Detalles_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="Compras_Devoluciones_Detalles" Type="Self.Compras_Devoluciones_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="PKProductoID" />
+            </Principal>
+            <Dependent Role="Compras_Devoluciones_Detalles">
+              <PropertyRef Name="FKProductosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Detalles_Descuentos">
+          <End Role="Descuentos" Type="Self.Descuentos" Multiplicity="0..1" />
+          <End Role="Ventas_Detalles" Type="Self.Ventas_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Descuentos">
+              <PropertyRef Name="PKDescuentoID" />
+            </Principal>
+            <Dependent Role="Ventas_Detalles">
+              <PropertyRef Name="FKDescuentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Rangos">
+          <End Role="Rangos" Type="Self.Rangos" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rangos">
+              <PropertyRef Name="PKRangoID" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="FKRango" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="PKEmpleadoID" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="FKEmpleadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RangosModulos_RangosModulos">
+          <End Role="Modulos" Type="Self.Modulos" Multiplicity="1" />
+          <End Role="RangosModulos" Type="Self.RangosModulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modulos">
+              <PropertyRef Name="PKModulosID" />
+            </Principal>
+            <Dependent Role="RangosModulos">
+              <PropertyRef Name="FKModulosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Productos_Productos_Categorias">
+          <End Role="Productos_Categorias" Type="Self.Productos_Categorias" Multiplicity="1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos_Categorias">
+              <PropertyRef Name="PKCategoriaID" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="FKCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Detalles_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="Ventas_Detalles" Type="Self.Ventas_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="PKProductoID" />
+            </Principal>
+            <Dependent Role="Ventas_Detalles">
+              <PropertyRef Name="FKProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Devoluciones_Detalles_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="Ventas_Devoluciones_Detalles" Type="Self.Ventas_Devoluciones_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="PKProductoID" />
+            </Principal>
+            <Dependent Role="Ventas_Devoluciones_Detalles">
+              <PropertyRef Name="FKProductosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RangosModulos_Rangos">
+          <End Role="Rangos" Type="Self.Rangos" Multiplicity="1" />
+          <End Role="RangosModulos" Type="Self.RangosModulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rangos">
+              <PropertyRef Name="PKRangoID" />
+            </Principal>
+            <Dependent Role="RangosModulos">
+              <PropertyRef Name="FKRangosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Detalles_Ventas">
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="1" />
+          <End Role="Ventas_Detalles" Type="Self.Ventas_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ventas">
+              <PropertyRef Name="PKVentaID" />
+            </Principal>
+            <Dependent Role="Ventas_Detalles">
+              <PropertyRef Name="FKVentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Devoluciones_Ventas">
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="1" />
+          <End Role="Ventas_Devoluciones" Type="Self.Ventas_Devoluciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ventas">
+              <PropertyRef Name="PKVentaID" />
+            </Principal>
+            <Dependent Role="Ventas_Devoluciones">
+              <PropertyRef Name="FKVentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas_Devoluciones_Detalles_Ventas_Devoluciones">
+          <End Role="Ventas_Devoluciones" Type="Self.Ventas_Devoluciones" Multiplicity="1" />
+          <End Role="Ventas_Devoluciones_Detalles" Type="Self.Ventas_Devoluciones_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ventas_Devoluciones">
+              <PropertyRef Name="PKVentaDevolucionID" />
+            </Principal>
+            <Dependent Role="Ventas_Devoluciones_Detalles">
+              <PropertyRef Name="FKDevolucionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FactEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Compras" EntityType="Self.Compras" />
+          <EntitySet Name="Compras_Detalles" EntityType="Self.Compras_Detalles" />
+          <EntitySet Name="Compras_Devoluciones" EntityType="Self.Compras_Devoluciones" />
+          <EntitySet Name="Compras_Devoluciones_Detalles" EntityType="Self.Compras_Devoluciones_Detalles" />
+          <EntitySet Name="Descuentos" EntityType="Self.Descuentos" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" />
+          <EntitySet Name="Modulos" EntityType="Self.Modulos" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" />
+          <EntitySet Name="Productos_Categorias" EntityType="Self.Productos_Categorias" />
+          <EntitySet Name="Productos_Presentaciones" EntityType="Self.Productos_Presentaciones" />
+          <EntitySet Name="Productos_Unidades" EntityType="Self.Productos_Unidades" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" />
+          <EntitySet Name="Rangos" EntityType="Self.Rangos" />
+          <EntitySet Name="RangosModulos" EntityType="Self.RangosModulos" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Ventas" EntityType="Self.Ventas" />
+          <EntitySet Name="Ventas_Detalles" EntityType="Self.Ventas_Detalles" />
+          <EntitySet Name="Ventas_Devoluciones" EntityType="Self.Ventas_Devoluciones" />
+          <EntitySet Name="Ventas_Devoluciones_Detalles" EntityType="Self.Ventas_Devoluciones_Detalles" />
+          <AssociationSet Name="FK_Compras_Detalles_Compras" Association="Self.FK_Compras_Detalles_Compras">
+            <End Role="Compras" EntitySet="Compras" />
+            <End Role="Compras_Detalles" EntitySet="Compras_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compras_Devoluciones_Compras" Association="Self.FK_Compras_Devoluciones_Compras">
+            <End Role="Compras" EntitySet="Compras" />
+            <End Role="Compras_Devoluciones" EntitySet="Compras_Devoluciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compras_Empleados" Association="Self.FK_Compras_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Compras" EntitySet="Compras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compras_Proveedores" Association="Self.FK_Compras_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Compras" EntitySet="Compras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compras_Detalles_Productos" Association="Self.FK_Compras_Detalles_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Compras_Detalles" EntitySet="Compras_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compras_Devoluciones_Detalles_Compras_Devoluciones" Association="Self.FK_Compras_Devoluciones_Detalles_Compras_Devoluciones">
+            <End Role="Compras_Devoluciones" EntitySet="Compras_Devoluciones" />
+            <End Role="Compras_Devoluciones_Detalles" EntitySet="Compras_Devoluciones_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compras_Devoluciones_Detalles_Productos" Association="Self.FK_Compras_Devoluciones_Detalles_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Compras_Devoluciones_Detalles" EntitySet="Compras_Devoluciones_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Detalles_Descuentos" Association="Self.FK_Ventas_Detalles_Descuentos">
+            <End Role="Descuentos" EntitySet="Descuentos" />
+            <End Role="Ventas_Detalles" EntitySet="Ventas_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Rangos" Association="Self.FK_Empleados_Rangos">
+            <End Role="Rangos" EntitySet="Rangos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Empleados" Association="Self.FK_Ventas_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RangosModulos_RangosModulos" Association="Self.FK_RangosModulos_RangosModulos">
+            <End Role="Modulos" EntitySet="Modulos" />
+            <End Role="RangosModulos" EntitySet="RangosModulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Productos_Productos_Categorias" Association="Self.FK_Productos_Productos_Categorias">
+            <End Role="Productos_Categorias" EntitySet="Productos_Categorias" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Detalles_Productos" Association="Self.FK_Ventas_Detalles_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Ventas_Detalles" EntitySet="Ventas_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Devoluciones_Detalles_Productos" Association="Self.FK_Ventas_Devoluciones_Detalles_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Ventas_Devoluciones_Detalles" EntitySet="Ventas_Devoluciones_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RangosModulos_Rangos" Association="Self.FK_RangosModulos_Rangos">
+            <End Role="Rangos" EntitySet="Rangos" />
+            <End Role="RangosModulos" EntitySet="RangosModulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Detalles_Ventas" Association="Self.FK_Ventas_Detalles_Ventas">
+            <End Role="Ventas" EntitySet="Ventas" />
+            <End Role="Ventas_Detalles" EntitySet="Ventas_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Devoluciones_Ventas" Association="Self.FK_Ventas_Devoluciones_Ventas">
+            <End Role="Ventas" EntitySet="Ventas" />
+            <End Role="Ventas_Devoluciones" EntitySet="Ventas_Devoluciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas_Devoluciones_Detalles_Ventas_Devoluciones" Association="Self.FK_Ventas_Devoluciones_Detalles_Ventas_Devoluciones">
+            <End Role="Ventas_Devoluciones" EntitySet="Ventas_Devoluciones" />
+            <End Role="Ventas_Devoluciones_Detalles" EntitySet="Ventas_Devoluciones_Detalles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProyectoFactModelStoreContainer" CdmEntityContainer="FactEntities2">
+          <EntitySetMapping Name="Compras">
+            <EntityTypeMapping TypeName="ProyectoFactModel.Compras">
+              <MappingFragment StoreEntitySet="Compras">
+                <ScalarProperty Name="PKCompraID" ColumnName="PKCompraID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="FKEmpleadoID" ColumnName="FKEmpleadoID" />
+                <ScalarProperty Name="FKProveedorID" ColumnName="FKProveedorID" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Compras_Detalles">
+            <EntityTypeMapping TypeName="ProyectoFactModel.Compras_Detalles">
+              <MappingFragment StoreEntitySet="Compras_Detalles">
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="PKCompraDetalleID" ColumnName="PKCompraDetalleID" />
+                <ScalarProperty Name="FKCompraID" ColumnName="FKCompraID" />
+                <ScalarProperty Name="FKProductoID" ColumnName="FKProductoID" />
+                <ScalarProperty Name="PrecioUnidad" ColumnName="PrecioUnidad" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="TotalProducto" ColumnName="TotalProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Compras_Devoluciones">
+            <EntityTypeMapping TypeName="ProyectoFactModel.Compras_Devoluciones">
+              <MappingFragment StoreEntitySet="Compras_Devoluciones">
+                <ScalarProperty Name="PKCompraDevolucionID" ColumnName="PKCompraDevolucionID" />
+                <ScalarProperty Name="FechaDevolucion" ColumnName="FechaDevolucion" />
+                <ScalarProperty Name="FKCompraID" ColumnName="FKCompraID" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Compras_Devoluciones_Detalles">
+            <EntityTypeMapping TypeName="ProyectoFactModel.Compras_Devoluciones_Detalles">
+              <MappingFragment StoreEntitySet="Compras_Devoluciones_Detalles">
+                <ScalarProperty Name="PKDevolucionDetalleID" ColumnName="PKDevolucionDetalleID" />
+                <ScalarProperty Name="FKDevolucionID" ColumnName="FKDevolucionID" />
+                <ScalarProperty Name="FKProductosID" ColumnName="FKProductosID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Descuentos">
+            <EntityTypeMapping TypeName="ProyectoFactModel.Descuentos">
+              <MappingFragment StoreEntitySet="Descuentos">
+                <ScalarProperty Name="PKDescuentoID" ColumnName="PKDescuentoID" />
+                <ScalarProperty Name="NombreDescuento" ColumnName="NombreDescuento" />
+                <ScalarProperty Name="CantidadDescuento" ColumnName="CantidadDescuento" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="ProyectoFactModel.Empleados">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="PKEmpleadoID" ColumnName="PKEmpleadoID" />
+                <ScalarProperty Name="NombreEmpleado" ColumnName="NombreEmpleado" />
+                <ScalarProperty Name="ApellidoEmpleado" ColumnName="ApellidoEmpleado" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="FKRango" ColumnName="FKRango" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modulos">
+            <EntityTypeMapping TypeName="ProyectoFactModel.Modulos">
+              <MappingFragment StoreEntitySet="Modulos">
+                <ScalarProperty Name="PKModulosID" ColumnName="PKModulosID" />
+                <ScalarProperty Name="DescripcionModulo" ColumnName="DescripcionModulo" />
+                <ScalarProperty Name="EstadoModulo" ColumnName="EstadoModulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="ProyectoFactModel.Productos">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="ISV" ColumnName="ISV" />
+                <ScalarProperty Name="PKProductoID" ColumnName="PKProductoID" />
+                <ScalarProperty Name="DescProducto" ColumnName="DescProducto" />
+                <ScalarProperty Name="Existencia" ColumnName="Existencia" />
+                <ScalarProperty Name="ExistenciaMinima" ColumnName="ExistenciaMinima" />
+                <ScalarProperty Name="FKCategoria" ColumnName="FKCategoria" />
+                <ScalarProperty Name="PrecioUnidadVenta" ColumnName="PrecioUnidadVenta" />
+                <ScalarProperty Name="PrecioUnidadCompra" ColumnName="PrecioUnidadCompra" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos_Categorias">
+            <EntityTypeMapping TypeName="ProyectoFactModel.Productos_Categorias">
+              <MappingFragment StoreEntitySet="Productos_Categorias">
+                <ScalarProperty Name="PKCategoriaID" ColumnName="PKCategoriaID" />
+                <ScalarProperty Name="NombreCategoria" ColumnName="NombreCategoria" />
+                <ScalarProperty Name="DescripcionCategoria" ColumnName="DescripcionCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos_Presentaciones">
+            <EntityTypeMapping TypeName="ProyectoFactModel.Productos_Presentaciones">
+              <MappingFragment StoreEntitySet="Productos_Presentaciones">
+                <ScalarProperty Name="PKPresentacionID" ColumnName="PKPresentacionID" />
+                <ScalarProperty Name="NombrePresentacion" ColumnName="NombrePresentacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos_Unidades">
+            <EntityTypeMapping TypeName="ProyectoFactModel.Productos_Unidades">
+              <MappingFragment StoreEntitySet="Productos_Unidades">
+                <ScalarProperty Name="PKUnidadID" ColumnName="PKUnidadID" />
+                <ScalarProperty Name="NombreUnidad" ColumnName="NombreUnidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedores">
+            <EntityTypeMapping TypeName="ProyectoFactModel.Proveedores">
+              <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="PKProveedorID" ColumnName="PKProveedorID" />
+                <ScalarProperty Name="NombreProveedor" ColumnName="NombreProveedor" />
+                <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+                <ScalarProperty Name="TelefonoContacto1" ColumnName="TelefonoContacto1" />
+                <ScalarProperty Name="TelefonoContacto2" ColumnName="TelefonoContacto2" />
+                <ScalarProperty Name="EmailContacto1" ColumnName="EmailContacto1" />
+                <ScalarProperty Name="EmailContacto2" ColumnName="EmailContacto2" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rangos">
+            <EntityTypeMapping TypeName="ProyectoFactModel.Rangos">
+              <MappingFragment StoreEntitySet="Rangos">
+                <ScalarProperty Name="PKRangoID" ColumnName="PKRangoID" />
+                <ScalarProperty Name="DescripcionRango" ColumnName="DescripcionRango" />
+                <ScalarProperty Name="EstadoRango" ColumnName="EstadoRango" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RangosModulos">
+            <EntityTypeMapping TypeName="ProyectoFactModel.RangosModulos">
+              <MappingFragment StoreEntitySet="RangosModulos">
+                <ScalarProperty Name="PKRangosModulos" ColumnName="PKRangosModulos" />
+                <ScalarProperty Name="FKRangosID" ColumnName="FKRangosID" />
+                <ScalarProperty Name="FKModulosID" ColumnName="FKModulosID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ProyectoFactModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ventas">
+            <EntityTypeMapping TypeName="ProyectoFactModel.Ventas">
+              <MappingFragment StoreEntitySet="Ventas">
+                <ScalarProperty Name="PKVentaID" ColumnName="PKVentaID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="FKEmpleadoID" ColumnName="FKEmpleadoID" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ventas_Detalles">
+            <EntityTypeMapping TypeName="ProyectoFactModel.Ventas_Detalles">
+              <MappingFragment StoreEntitySet="Ventas_Detalles">
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="PKVentaDetalleID" ColumnName="PKVentaDetalleID" />
+                <ScalarProperty Name="FKVentaID" ColumnName="FKVentaID" />
+                <ScalarProperty Name="FKProductoID" ColumnName="FKProductoID" />
+                <ScalarProperty Name="PrecioUnidad" ColumnName="PrecioUnidad" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="FKDescuentoID" ColumnName="FKDescuentoID" />
+                <ScalarProperty Name="TotalProducto" ColumnName="TotalProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ventas_Devoluciones">
+            <EntityTypeMapping TypeName="ProyectoFactModel.Ventas_Devoluciones">
+              <MappingFragment StoreEntitySet="Ventas_Devoluciones">
+                <ScalarProperty Name="PKVentaDevolucionID" ColumnName="PKVentaDevolucionID" />
+                <ScalarProperty Name="FechaDevolucion" ColumnName="FechaDevolucion" />
+                <ScalarProperty Name="FKVentaID" ColumnName="FKVentaID" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ventas_Devoluciones_Detalles">
+            <EntityTypeMapping TypeName="ProyectoFactModel.Ventas_Devoluciones_Detalles">
+              <MappingFragment StoreEntitySet="Ventas_Devoluciones_Detalles">
+                <ScalarProperty Name="PKDevolucionDetalleID" ColumnName="PKDevolucionDetalleID" />
+                <ScalarProperty Name="FKDevolucionID" ColumnName="FKDevolucionID" />
+                <ScalarProperty Name="FKProductosID" ColumnName="FKProductosID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

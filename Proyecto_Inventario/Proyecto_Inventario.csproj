@@ -1,0 +1,415 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0EC41A8D-F7D1-4447-A698-C1BD18911D87}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Proyecto_Inventario</RootNamespace>
+    <AssemblyName>Proyecto_Inventario</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Compras.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Compras_Detalles.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Compras_Devoluciones.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Compras_Devoluciones_Detalles.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContDevoluciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContDevoluciones.Designer.cs">
+      <DependentUpon>ContDevoluciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Descuentos.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Empleados.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LINQTODATATABLE.cs" />
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\MenuAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu\MenuAdmin.Designer.cs">
+      <DependentUpon>MenuAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\MenuCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu\MenuCompra.Designer.cs">
+      <DependentUpon>MenuCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\MenuGerente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu\MenuGerente.Designer.cs">
+      <DependentUpon>MenuGerente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\MenuSU.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu\MenuSU.Designer.cs">
+      <DependentUpon>MenuSU.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\MenuVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu\MenuVenta.Designer.cs">
+      <DependentUpon>MenuVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MNT_Compras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MNT_Compras.Designer.cs">
+      <DependentUpon>MNT_Compras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MNT_ComprasDetalles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MNT_ComprasDetalles.Designer.cs">
+      <DependentUpon>MNT_ComprasDetalles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MNT_ComprasDetallesResultados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MNT_ComprasDetallesResultados.Designer.cs">
+      <DependentUpon>MNT_ComprasDetallesResultados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MNT_ComprasDevoluciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MNT_ComprasDevoluciones.Designer.cs">
+      <DependentUpon>MNT_ComprasDevoluciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MNT_ComprasDevolucionesResultados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MNT_ComprasDevolucionesResultados.Designer.cs">
+      <DependentUpon>MNT_ComprasDevolucionesResultados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MNT_Descuentos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MNT_Descuentos.Designer.cs">
+      <DependentUpon>MNT_Descuentos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MNT_Empleados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MNT_Empleados.Designer.cs">
+      <DependentUpon>MNT_Empleados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MNT_Productos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MNT_Productos.Designer.cs">
+      <DependentUpon>MNT_Productos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MNT_ProductosCategorias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MNT_ProductosCategorias.Designer.cs">
+      <DependentUpon>MNT_ProductosCategorias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MNT_Proveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MNT_Proveedores.Designer.cs">
+      <DependentUpon>MNT_Proveedores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MNT_RangosModulos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MNT_RangosModulos.Designer.cs">
+      <DependentUpon>MNT_RangosModulos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MNT_Ventas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MNT_Ventas.Designer.cs">
+      <DependentUpon>MNT_Ventas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MNT_VentasDetalles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MNT_VentasDetalles.Designer.cs">
+      <DependentUpon>MNT_VentasDetalles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MNT_VentasDetallesResultados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MNT_VentasDetallesResultados.Designer.cs">
+      <DependentUpon>MNT_VentasDetallesResultados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MNT_VentasDevoluciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MNT_VentasDevoluciones.Designer.cs">
+      <DependentUpon>MNT_VentasDevoluciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MNT_VentasDevolucionesResultados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MNT_VentasDevolucionesResultados.Designer.cs">
+      <DependentUpon>MNT_VentasDevolucionesResultados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFacturacion.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelFacturacion.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFacturacion.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelFacturacion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelFacturacion.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Modulos.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Productos.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Productos_Categorias.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Productos_Presentaciones.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Productos_Unidades.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proveedores.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rangos.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RangosModulos.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ventas.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ventas_Detalles.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ventas_Devoluciones.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ventas_Devoluciones_Detalles.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ContDevoluciones.resx">
+      <DependentUpon>ContDevoluciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu\MenuAdmin.resx">
+      <DependentUpon>MenuAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu\MenuCompra.resx">
+      <DependentUpon>MenuCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu\MenuGerente.resx">
+      <DependentUpon>MenuGerente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu\MenuSU.resx">
+      <DependentUpon>MenuSU.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu\MenuVenta.resx">
+      <DependentUpon>MenuVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MNT_Compras.resx">
+      <DependentUpon>MNT_Compras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MNT_ComprasDetalles.resx">
+      <DependentUpon>MNT_ComprasDetalles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MNT_ComprasDetallesResultados.resx">
+      <DependentUpon>MNT_ComprasDetallesResultados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MNT_ComprasDevoluciones.resx">
+      <DependentUpon>MNT_ComprasDevoluciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MNT_ComprasDevolucionesResultados.resx">
+      <DependentUpon>MNT_ComprasDevolucionesResultados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MNT_Descuentos.resx">
+      <DependentUpon>MNT_Descuentos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MNT_Empleados.resx">
+      <DependentUpon>MNT_Empleados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MNT_Productos.resx">
+      <DependentUpon>MNT_Productos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MNT_ProductosCategorias.resx">
+      <DependentUpon>MNT_ProductosCategorias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MNT_Proveedores.resx">
+      <DependentUpon>MNT_Proveedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MNT_RangosModulos.resx">
+      <DependentUpon>MNT_RangosModulos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MNT_Ventas.resx">
+      <DependentUpon>MNT_Ventas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MNT_VentasDetalles.resx">
+      <DependentUpon>MNT_VentasDetalles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MNT_VentasDetallesResultados.resx">
+      <DependentUpon>MNT_VentasDetallesResultados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MNT_VentasDevoluciones.resx">
+      <DependentUpon>MNT_VentasDevoluciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MNT_VentasDevolucionesResultados.resx">
+      <DependentUpon>MNT_VentasDevolucionesResultados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EntityDeploy Include="ModelFacturacion.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelFacturacion.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ModelFacturacion.edmx.diagram">
+      <DependentUpon>ModelFacturacion.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModelFacturacion.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelFacturacion.edmx</DependentUpon>
+      <LastGenOutput>ModelFacturacion.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelFacturacion.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelFacturacion.edmx</DependentUpon>
+      <LastGenOutput>ModelFacturacion.cs</LastGenOutput>
+    </Content>
+    <None Include="Resources\logo 165x165.png" />
+    <None Include="Resources\transferir 90x90.png" />
+    <None Include="Resources\cajadevolucion 90x90.png" />
+    <None Include="Resources\ventas 90x90.png" />
+    <None Include="Resources\usuarios 90x90.png" />
+    <None Include="Resources\proveedores 90x90.png" />
+    <None Include="Resources\devolucion 90x90.png" />
+    <None Include="Resources\descuento 90x90.png" />
+    <None Include="Resources\compras 90x90.png" />
+    <None Include="Resources\producto 90x90.png" />
+    <None Include="Resources\categorias 90x90.png" />
+    <None Include="Resources\producto 110x110.png" />
+    <None Include="Resources\fondo1 830x471.jpg" />
+    <None Include="Resources\producto 130x130.png" />
+    <None Include="Resources\fondo 830x471.jpg" />
+    <None Include="Resources\fondo 815x471.jpg" />
+    <None Include="Resources\cerrar-sesion 40x40.png" />
+    <None Include="Resources\ventas.png" />
+    <None Include="Resources\usuarios.png" />
+    <None Include="Resources\proveedores.png" />
+    <None Include="Resources\producto.png" />
+    <None Include="Resources\devolucion.png" />
+    <None Include="Resources\descuento.png" />
+    <None Include="Resources\compras.png" />
+    <None Include="Resources\cerrar-sesion.png" />
+    <None Include="Resources\categorias.png" />
+    <None Include="Resources\Venti 165x165.png" />
+    <None Include="Resources\Venti 175x175.png" />
+    <None Include="Resources\Screenshot_5 213x213.png" />
+    <None Include="Resources\Screenshot_5.png" />
+    <None Include="Resources\Xiao.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
